@@ -24,30 +24,13 @@ public class MainActivity extends BaseActivity implements MainView{
     @InjectPresenter
     MainPresenter mPresenter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MainApplication.getApplicationComponent().inject(this);
+
         mPresenter.checkAuth();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
-            @Override
-            public void onResult(VKAccessToken res) {
-                // Пользователь успешно авторизовался
-                mPresenter.checkAuth();
-
-            }
-
-            @Override
-            public void onError(VKError error) {
-                // Произошла ошибка авторизации (например, пользователь запретил авторизацию)
-            }
-        })) {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
     @Override
@@ -57,8 +40,27 @@ public class MainActivity extends BaseActivity implements MainView{
 
     @Override
     public void signedIn() {
-        Toast.makeText(this, "User id " + CurrentUser.getId(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Current user id: " + CurrentUser.getId(), Toast.LENGTH_LONG).show();
         setContent(new NewsFeedFragment());
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
+            @Override
+            public void onResult(VKAccessToken res) {
+                // Пользователь успешно авторизовался
+                mPresenter.checkAuth();
+            }
+
+            @Override
+            public void onError(VKError error) {
+                // Произошла ошибка авторизации (например, пользователь запретил авторизацию)
+            }
+        })) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override

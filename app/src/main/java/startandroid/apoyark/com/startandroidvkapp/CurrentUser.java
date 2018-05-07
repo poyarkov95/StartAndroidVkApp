@@ -3,8 +3,6 @@ package startandroid.apoyark.com.startandroidvkapp;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKSdk;
 
-import java.util.Objects;
-
 /**
  * Created by User on 05.05.2018.
  */
@@ -26,7 +24,7 @@ public class CurrentUser {
         return VKAccessToken.currentToken().userId;
     }
 
-    public static boolean isAuthorised(){
+    public static boolean isAuthorized(){
         return VKSdk.isLoggedIn() &&
                 VKAccessToken.currentToken() != null
                 && !VKAccessToken.currentToken().isExpired();

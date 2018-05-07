@@ -13,7 +13,7 @@ import startandroid.apoyark.com.startandroidvkapp.view.MainView;
 public class MainPresenter extends MvpPresenter<MainView> {
 
     public void checkAuth(){
-        if(!CurrentUser.isAuthorised()){
+        if(!CurrentUser.isAuthorized()){
             getViewState().startSignIn();
         } else {
             getViewState().signedIn();

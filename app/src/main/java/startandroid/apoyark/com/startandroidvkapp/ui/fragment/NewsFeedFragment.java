@@ -22,31 +22,24 @@ import startandroid.apoyark.com.startandroidvkapp.rest.model.response.Full;
 
 public class NewsFeedFragment extends BaseFragment {
 
-    public NewsFeedFragment() {
-    }
-
     @Inject
     WallApi mWallApi;
 
-    @Override
-    protected int getMainContentLayout() {
-        return R.layout.fragment_feed;
-    }
-
-    @Override
-    public int onCreateToolbarTitle() {
-        return R.string.screen_name_news;
+    public NewsFeedFragment() {
+        // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         MainApplication.getApplicationComponent().inject(this);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         mWallApi.get("-86529522", CurrentUser.getAccessToken(), 1, "5.67").enqueue(new Callback<Full<BaseItemResponse>>() {
             @Override
             public void onResponse(Call<Full<BaseItemResponse>> call, Response<Full<BaseItemResponse>> response) {
@@ -58,5 +51,15 @@ public class NewsFeedFragment extends BaseFragment {
                 t.printStackTrace();
             }
         });
+    }
+
+    @Override
+    protected int getMainContentLayout() {
+        return R.layout.fragment_feed;
+    }
+
+    @Override
+    public int onCreateToolbarTitle() {
+        return R.string.screen_name_news;
     }
 }

@@ -22,52 +22,57 @@ import startandroid.apoyark.com.startandroidvkapp.ui.fragment.BaseFragment;
 public abstract class BaseActivity extends MvpAppCompatActivity {
 
     @Inject
-    MyFragmentManager mFragmentManager;
+    MyFragmentManager myFragmentManager;
 
+    Toolbar toolbar;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        MainApplication.getApplicationComponent().inject(this);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FrameLayout parent = (FrameLayout)findViewById(R.id.main_wrapper);
+        FrameLayout parent = (FrameLayout) findViewById(R.id.main_wrapper);
         getLayoutInflater().inflate(getMainContentLayout(), parent);
-
-        MainApplication.getApplicationComponent().inject(this);
     }
+
 
     @LayoutRes
     protected abstract int getMainContentLayout();
 
-    public void fragmentOnScreen(BaseFragment baseFragment){
+
+    public void fragmentOnScreen(BaseFragment baseFragment) {
         setToolbarTitle(baseFragment.createToolbarTitle(this));
     }
 
-    public void setToolbarTitle(String title){
-        if(getSupportActionBar() != null){
+
+    private void setToolbarTitle(String title) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(title);
         }
     }
 
-    public void setContent(BaseFragment fragment){
-        mFragmentManager.setFragment(this, fragment, R.id.main_wrapper);
+
+    public void setContent(BaseFragment fragment) {
+        myFragmentManager.setFragment(this, fragment, R.id.main_wrapper);
     }
 
-    public void addContent(BaseFragment fragment){
-        mFragmentManager.addFragment(this, fragment, R.id.main_wrapper);
+    public void addContent(BaseFragment fragment) {
+        myFragmentManager.addFragment(this, fragment, R.id.main_wrapper);
     }
 
-    public boolean removeCurrentFragment(){
-        return mFragmentManager.removeCurrentFragment(this);
+    public boolean removeCurrentFragment() {
+        return myFragmentManager.removeCurrentFragment(this);
     }
 
-    public boolean removeFragment(BaseFragment fragment){
-        return mFragmentManager.removeFragment(this, fragment);
+    public boolean removeFragment(BaseFragment fragment) {
+        return myFragmentManager.removeFragment(this, fragment);
     }
+
 
     @Override
     public void onBackPressed() {
