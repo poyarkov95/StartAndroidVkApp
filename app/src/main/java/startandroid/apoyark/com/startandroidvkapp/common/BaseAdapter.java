@@ -1,4 +1,4 @@
-package startandroid.apoyark.com.startandroidvkapp.ui.common;
+package startandroid.apoyark.com.startandroidvkapp.common;
 
 import android.support.v4.util.ArrayMap;
 import android.support.v7.widget.RecyclerView;

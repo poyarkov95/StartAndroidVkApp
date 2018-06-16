@@ -50,5 +50,4 @@ public class Likes {
     public void setCanPublish(Integer canPublish) {
         this.canPublish = canPublish;
     }
-
 }

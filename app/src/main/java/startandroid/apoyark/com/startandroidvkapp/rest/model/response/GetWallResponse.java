@@ -6,5 +6,5 @@ import startandroid.apoyark.com.startandroidvkapp.model.WallItem;
  * Created by User on 09.05.2018.
  */
 
-public class GetWallResponse extends Full<BaseItemResponse<WallItem>> {
+public class GetWallResponse extends Full<ItemsWithSenderResponse<WallItem>> {
 }

@@ -9,6 +9,8 @@ import startandroid.apoyark.com.startandroidvkapp.di.module.RestModule;
 import startandroid.apoyark.com.startandroidvkapp.ui.activity.BaseActivity;
 import startandroid.apoyark.com.startandroidvkapp.ui.activity.MainActivity;
 import startandroid.apoyark.com.startandroidvkapp.ui.fragment.NewsFeedFragment;
+import startandroid.apoyark.com.startandroidvkapp.ui.holder.NewsItemBodyHolder;
+import startandroid.apoyark.com.startandroidvkapp.ui.holder.NewsItemFooterHolder;
 
 /**
  * Created by User on 05.05.2018.
@@ -22,4 +24,8 @@ public interface ApplicationComponent {
     void inject(MainActivity activity);
 
     void inject(NewsFeedFragment fragment);
+
+    void inject(NewsItemBodyHolder holder);
+
+    void inject(NewsItemFooterHolder holder);
 }

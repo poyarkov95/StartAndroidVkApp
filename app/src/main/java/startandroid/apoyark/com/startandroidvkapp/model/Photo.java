@@ -3,8 +3,9 @@ package startandroid.apoyark.com.startandroidvkapp.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.vk.sdk.api.model.VKAttachments;
 
-public class Photo {
+public class Photo implements Attachment {
 
     @SerializedName("id")
     @Expose
@@ -161,4 +162,8 @@ public class Photo {
         this.accessKey = accessKey;
     }
 
+    @Override
+    public String getType() {
+        return VKAttachments.TYPE_PHOTO;
+    }
 }
