@@ -1,11 +1,13 @@
 
-package startandroid.apoyark.com.startandroidvkapp.model;
+package startandroid.apoyark.com.startandroidvkapp.model.attachment;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.vk.sdk.api.model.VKAttachments;
 
-public class Photo implements Attachment {
+import io.realm.RealmObject;
+
+public class Photo extends RealmObject implements Attachment {
 
     @SerializedName("id")
     @Expose

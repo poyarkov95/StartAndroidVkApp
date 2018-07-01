@@ -1,15 +1,17 @@
 package startandroid.apoyark.com.startandroidvkapp.ui.activity;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import startandroid.apoyark.com.startandroidvkapp.MainApplication;
 import startandroid.apoyark.com.startandroidvkapp.R;
 import startandroid.apoyark.com.startandroidvkapp.common.manager.MyFragmentManager;
@@ -24,16 +26,21 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
     @Inject
     MyFragmentManager myFragmentManager;
 
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    @BindView(R.id.progress)
+    protected ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
+        ButterKnife.bind(this);
+
         MainApplication.getApplicationComponent().inject(this);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FrameLayout parent = (FrameLayout) findViewById(R.id.main_wrapper);
@@ -73,9 +80,12 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
         return myFragmentManager.removeFragment(this, fragment);
     }
 
-
     @Override
     public void onBackPressed() {
         removeCurrentFragment();
+    }
+
+    public ProgressBar getProgressBar() {
+        return progressBar;
     }
 }

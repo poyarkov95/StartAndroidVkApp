@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.vk.sdk.VKSdk;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import startandroid.apoyark.com.startandroidvkapp.di.component.ApplicationComponent;
 
 import startandroid.apoyark.com.startandroidvkapp.di.component.DaggerApplicationComponent;
@@ -21,6 +23,12 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Realm.init(this);
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
+
         VKSdk.initialize(this);
 
         initComponent();

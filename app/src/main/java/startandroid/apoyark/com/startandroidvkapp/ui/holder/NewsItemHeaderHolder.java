@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import startandroid.apoyark.com.startandroidvkapp.R;
 import startandroid.apoyark.com.startandroidvkapp.model.view.NewsItemHeaderViewModel;
@@ -27,6 +28,7 @@ public class NewsItemHeaderHolder extends BaseViewHolder<NewsItemHeaderViewModel
 
     public NewsItemHeaderHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this, itemView);
 
         circleProfileImage = (CircleImageView)itemView.findViewById(R.id.civ_profile_image);
         tvName = (TextView)itemView.findViewById(R.id.tv_profile_name);

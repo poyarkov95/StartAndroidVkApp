@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import startandroid.apoyark.com.startandroidvkapp.model.ApiAttachment;
+import startandroid.apoyark.com.startandroidvkapp.model.attachment.ApiAttachment;
 
 /**
  * Created by User on 04.06.2018.

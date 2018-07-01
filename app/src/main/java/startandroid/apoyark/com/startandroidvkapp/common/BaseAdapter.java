@@ -14,7 +14,7 @@ import startandroid.apoyark.com.startandroidvkapp.ui.holder.BaseViewHolder;
  * Created by User on 13.05.2018.
  */
 
-public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseViewModel>>{
+public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseViewModel>> {
 
     private List<BaseViewModel> list = new ArrayList<>();
 
@@ -41,19 +41,19 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseViewMod
         return list.size();
     }
 
-    public void registerTypeInstance(BaseViewModel item){
-        if(!mTypeInstances.containsKey(item.getType())){
+    public void registerTypeInstance(BaseViewModel item) {
+        if (!mTypeInstances.containsKey(item.getType())) {
             mTypeInstances.put(item.getType().getValue(), item);
         }
     }
 
-    public void setItems(List<BaseViewModel> items){
+    public void setItems(List<BaseViewModel> items) {
         clearList();
         addItems(items);
     }
 
-    public void addItems(List<? extends BaseViewModel> newItems){
-        for(BaseViewModel newItem : newItems){
+    public void addItems(List<? extends BaseViewModel> newItems) {
+        for (BaseViewModel newItem : newItems) {
             registerTypeInstance(newItem);
         }
 
@@ -62,7 +62,7 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseViewMod
         notifyDataSetChanged();
     }
 
-    public void clearList(){
+    public void clearList() {
         list.clear();
     }
 
@@ -71,7 +71,18 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseViewMod
         return getItem(position).getType().getValue();
     }
 
-    public BaseViewModel getItem(int position){
+    public BaseViewModel getItem(int position) {
         return list.get(position);
+    }
+
+    public int getRealItemCount() {
+        int count = 0;
+
+        for (int i = 0; i < getItemCount(); i++) {
+            if (!getItem(i).isItemDecorator()){
+                count++;
+            }
+        }
+        return count;
     }
 }

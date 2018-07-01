@@ -86,4 +86,9 @@ public class NewsItemFooterViewModel extends BaseViewModel {
     protected BaseViewHolder onCreateViewHolder(View v) {
         return new NewsItemFooterHolder(v);
     }
+
+    @Override
+    public boolean isItemDecorator() {
+        return false;
+    }
 }

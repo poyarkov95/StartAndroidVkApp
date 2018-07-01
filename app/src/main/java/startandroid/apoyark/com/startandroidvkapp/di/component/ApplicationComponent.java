@@ -3,9 +3,11 @@ package startandroid.apoyark.com.startandroidvkapp.di.component;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import startandroid.apoyark.com.startandroidvkapp.common.manager.NetworkManager;
 import startandroid.apoyark.com.startandroidvkapp.di.module.ApplicationModule;
 import startandroid.apoyark.com.startandroidvkapp.di.module.ManagerModule;
 import startandroid.apoyark.com.startandroidvkapp.di.module.RestModule;
+import startandroid.apoyark.com.startandroidvkapp.mvp.presenter.NewsFeedPresenter;
 import startandroid.apoyark.com.startandroidvkapp.ui.activity.BaseActivity;
 import startandroid.apoyark.com.startandroidvkapp.ui.activity.MainActivity;
 import startandroid.apoyark.com.startandroidvkapp.ui.fragment.NewsFeedFragment;
@@ -28,4 +30,8 @@ public interface ApplicationComponent {
     void inject(NewsItemBodyHolder holder);
 
     void inject(NewsItemFooterHolder holder);
+
+    void inject(NewsFeedPresenter presenter);
+
+    void inject(NetworkManager networkManager);
 }

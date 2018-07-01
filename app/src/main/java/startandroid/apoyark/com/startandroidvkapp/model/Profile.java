@@ -3,11 +3,13 @@ package startandroid.apoyark.com.startandroidvkapp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+
 /**
  * Created by User on 13.05.2018.
  */
 
-public class Profile implements Owner {
+public class Profile extends RealmObject implements Owner {
 
     @SerializedName("id")
     @Expose

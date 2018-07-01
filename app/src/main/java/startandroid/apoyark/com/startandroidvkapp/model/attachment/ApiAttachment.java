@@ -1,5 +1,5 @@
 
-package startandroid.apoyark.com.startandroidvkapp.model;
+package startandroid.apoyark.com.startandroidvkapp.model.attachment;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,9 @@ import com.vk.sdk.api.model.VKAttachments;
 
 import java.util.NoSuchElementException;
 
-public class ApiAttachment {
+import io.realm.RealmObject;
+
+public class ApiAttachment extends RealmObject {
 
     @SerializedName("type")
     @Expose

@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 
+import startandroid.apoyark.com.startandroidvkapp.ui.activity.BaseActivity;
+
 /**
  * Created by User on 05.05.2018.
  */
@@ -26,10 +28,14 @@ public abstract class BaseFragment extends MvpAppCompatFragment {
         return inflater.inflate(getMainContentLayout(), container, false);
     }
 
-    public String createToolbarTitle(Context context){
+    public String createToolbarTitle(Context context) {
         return context.getString(onCreateToolbarTitle());
     }
 
     @StringRes
     public abstract int onCreateToolbarTitle();
+
+    public BaseActivity getBaseActivity() {
+        return (BaseActivity) getActivity();
+    }
 }
