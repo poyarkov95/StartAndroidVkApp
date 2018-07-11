@@ -8,6 +8,8 @@ import startandroid.apoyark.com.startandroidvkapp.di.module.ApplicationModule;
 import startandroid.apoyark.com.startandroidvkapp.di.module.ManagerModule;
 import startandroid.apoyark.com.startandroidvkapp.di.module.RestModule;
 import startandroid.apoyark.com.startandroidvkapp.mvp.presenter.NewsFeedPresenter;
+import startandroid.apoyark.com.startandroidvkapp.presenter.MainPresenter;
+import startandroid.apoyark.com.startandroidvkapp.presenter.MembersPresenter;
 import startandroid.apoyark.com.startandroidvkapp.ui.activity.BaseActivity;
 import startandroid.apoyark.com.startandroidvkapp.ui.activity.MainActivity;
 import startandroid.apoyark.com.startandroidvkapp.ui.fragment.NewsFeedFragment;
@@ -34,4 +36,8 @@ public interface ApplicationComponent {
     void inject(NewsFeedPresenter presenter);
 
     void inject(NetworkManager networkManager);
+
+    void inject(MainPresenter mainPresenter);
+
+    void inject(MembersPresenter membersPresenter);
 }

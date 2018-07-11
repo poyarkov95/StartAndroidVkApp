@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import startandroid.apoyark.com.startandroidvkapp.MainApplication;
 import startandroid.apoyark.com.startandroidvkapp.R;
 import startandroid.apoyark.com.startandroidvkapp.common.utils.Utils;
@@ -22,14 +24,26 @@ import startandroid.apoyark.com.startandroidvkapp.model.view.RepostCounterViewMo
 
 public class NewsItemFooterHolder extends BaseViewHolder<NewsItemFooterViewModel> {
 
-    private TextView textViewDate;
+    @BindView(R.id.tv_date)
+    public TextView textViewDate;
 
-    private TextView textViewLikesCount;
-    private TextView textViewLikesIcon;
-    private TextView textViewCommentsIcon;
-    private TextView textViewCommentsCount;
-    private TextView textViewRepostIcon;
-    private TextView textViewRepostsCount;
+    @BindView(R.id.tv_likes_count)
+    public TextView textViewLikesCount;
+
+    @BindView(R.id.tv_likes_icon)
+    public TextView textViewLikesIcon;
+
+    @BindView(R.id.tv_comments_icon)
+    public TextView textViewCommentsIcon;
+
+    @BindView(R.id.tv_comments_count)
+    public TextView textViewCommentsCount;
+
+    @BindView(R.id.tv_reposts_icon)
+    public TextView textViewRepostIcon;
+
+    @BindView(R.id.tv_reposts_count)
+    public TextView textViewRepostsCount;
 
     @Inject
     Typeface googleFontTypeFace;
@@ -39,28 +53,24 @@ public class NewsItemFooterHolder extends BaseViewHolder<NewsItemFooterViewModel
 
     public NewsItemFooterHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this, itemView);
         MainApplication.getApplicationComponent().inject(this);
 
         context = itemView.getContext();
         resources = context.getResources();
 
-        textViewDate = (TextView) itemView.findViewById(R.id.tv_date);
-        textViewLikesIcon = (TextView) itemView.findViewById(R.id.tv_likes_icon);
-        textViewLikesCount = (TextView) itemView.findViewById(R.id.tv_likes_count);
-        textViewCommentsIcon = (TextView) itemView.findViewById(R.id.tv_comments_icon);
-        textViewCommentsCount = (TextView) itemView.findViewById(R.id.tv_comments_count);
-        textViewRepostIcon = (TextView) itemView.findViewById(R.id.tv_reposts_icon);
-        textViewRepostsCount = (TextView) itemView.findViewById(R.id.tv_reposts_count);
-
         textViewLikesIcon.setTypeface(googleFontTypeFace);
         textViewCommentsIcon.setTypeface(googleFontTypeFace);
         textViewRepostIcon.setTypeface(googleFontTypeFace);
-
     }
 
     @Override
     public void bindViewHolder(NewsItemFooterViewModel item) {
         textViewDate.setText(Utils.parseDate(item.getmDateLong(), context));
+
+        bindLikes(item.getmLikes());
+        bindComments(item.getmComments());
+        bindReposts(item.getmReposts());
     }
 
     private void bindLikes(LikeCounterViewModel likes) {

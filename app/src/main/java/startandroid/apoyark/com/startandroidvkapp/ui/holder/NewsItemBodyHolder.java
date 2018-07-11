@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import startandroid.apoyark.com.startandroidvkapp.MainApplication;
 import startandroid.apoyark.com.startandroidvkapp.R;
 import startandroid.apoyark.com.startandroidvkapp.model.view.NewsItemBodyViewModel;
@@ -16,19 +18,20 @@ import startandroid.apoyark.com.startandroidvkapp.model.view.NewsItemBodyViewMod
 
 public class NewsItemBodyHolder extends BaseViewHolder<NewsItemBodyViewModel> {
 
+    @BindView(R.id.tv_text)
     public TextView textView;
 
-    private TextView tvAttachments;
+    @BindView(R.id.tv_attachments)
+    public TextView tvAttachments;
 
     @Inject
     Typeface mFontGoogle;
 
     public NewsItemBodyHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this, itemView);
 
         MainApplication.getApplicationComponent().inject(this);
-        textView = (TextView)itemView.findViewById(R.id.tv_text);
-        tvAttachments = (TextView)itemView.findViewById(R.id.tv_attachments);
 
         if(tvAttachments != null){
             tvAttachments.setTypeface(mFontGoogle);

@@ -68,12 +68,10 @@ public class WallGetRequestModel extends BaseRequestModel {
     }
 
     @Override
-    public Map<String, String> onMapCreate(Map<String, String> map) {
+    public void onMapCreate(Map<String, String> map) {
         map.put(VKApiConst.OWNER_ID, String.valueOf(getOwnerId()));
         map.put(VKApiConst.COUNT, String.valueOf(getCount()));
         map.put(VKApiConst.OFFSET, String.valueOf(getOffset()));
         map.put(VKApiConst.EXTENDED, String.valueOf(getExtended()));
-
-        return map;
     }
 }

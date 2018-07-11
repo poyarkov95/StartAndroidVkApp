@@ -37,9 +37,8 @@ public abstract class BaseRequestModel {
         }
 
         onMapCreate(map);
-
         return map;
     }
 
-    public abstract Map<String, String> onMapCreate(Map<String, String> map);
+    public abstract void onMapCreate(Map<String, String> map);
 }

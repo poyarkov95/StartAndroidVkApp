@@ -5,6 +5,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import startandroid.apoyark.com.startandroidvkapp.rest.RestClient;
+import startandroid.apoyark.com.startandroidvkapp.rest.api.GroupsApi;
+import startandroid.apoyark.com.startandroidvkapp.rest.api.UsersApi;
 import startandroid.apoyark.com.startandroidvkapp.rest.api.WallApi;
 
 /**
@@ -28,5 +30,17 @@ public class RestModule {
     @Singleton
     public WallApi provideWallApi() {
         return mRestClient.createService(WallApi.class);
+    }
+
+    @Provides
+    @Singleton
+    public UsersApi provideUsersApi() {
+        return mRestClient.createService(UsersApi.class);
+    }
+
+    @Provides
+    @Singleton
+    public GroupsApi provideGroupsApi() {
+        return mRestClient.createService(GroupsApi.class);
     }
 }

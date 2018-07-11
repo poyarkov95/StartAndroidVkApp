@@ -9,11 +9,14 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableTransformer;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
+import startandroid.apoyark.com.startandroidvkapp.CurrentUser;
 import startandroid.apoyark.com.startandroidvkapp.MainApplication;
 import startandroid.apoyark.com.startandroidvkapp.common.utils.VkListHelper;
+import startandroid.apoyark.com.startandroidvkapp.consts.ApiConstants;
 import startandroid.apoyark.com.startandroidvkapp.model.WallItem;
 import startandroid.apoyark.com.startandroidvkapp.model.view.BaseViewModel;
 import startandroid.apoyark.com.startandroidvkapp.model.view.NewsItemBodyViewModel;
@@ -28,6 +31,8 @@ public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView> {
     @Inject
     WallApi wallApi;
 
+    private boolean enableIdFiltering = false;
+
 
     public NewsFeedPresenter() {
         MainApplication.getApplicationComponent().inject(this);
@@ -35,8 +40,9 @@ public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView> {
 
     @Override
     public Observable<BaseViewModel> onCreateLoadDataObservable(int count, int offset) {
-        return wallApi.get(new WallGetRequestModel(-86529522, count, offset).toMap())
+        return wallApi.get(new WallGetRequestModel(ApiConstants.MY_GROUP_ID, count, offset).toMap())
                 .flatMap(full -> Observable.fromIterable(VkListHelper.getWallList(full.response)))
+                .compose(applyFilter())
                 .doOnNext(this::saveToDb)
                 .flatMap(wallItem -> {
                     List<BaseViewModel> baseItems = new ArrayList<>();
@@ -52,6 +58,7 @@ public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView> {
     public Observable<BaseViewModel> onCreateRestoreDataObservable() {
         return Observable.fromCallable(getListFromRealm())
                 .flatMap(Observable::fromIterable)
+                .compose(applyFilter())
                 .flatMap(wallItem -> Observable.fromIterable(parsePojoModel(wallItem)));
     }
 
@@ -72,5 +79,17 @@ public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView> {
         baseViewModels.add(new NewsItemBodyViewModel(wallItem));
         baseViewModels.add(new NewsItemFooterViewModel(wallItem));
         return baseViewModels;
+    }
+
+    public void setEnableIdFiltering(boolean enableIdFiltering) {
+        this.enableIdFiltering = enableIdFiltering;
+    }
+
+    protected ObservableTransformer<WallItem, WallItem> applyFilter() {
+        if(enableIdFiltering && CurrentUser.getId() != null) {
+            return baseItemObservable -> baseItemObservable.filter(wallItem -> CurrentUser.getId().equals(String.valueOf(wallItem.getFromId())));
+        } else {
+            return baseItemObservable -> baseItemObservable;
+        }
     }
 }

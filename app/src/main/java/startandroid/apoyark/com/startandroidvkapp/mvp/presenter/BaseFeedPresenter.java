@@ -132,6 +132,6 @@ public abstract class BaseFeedPresenter<V extends BaseFeedView> extends MvpPrese
 
     public void saveToDb(RealmObject realmObject){
         Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(realmObject));//7.3
+        realm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(realmObject));
     }
 }
